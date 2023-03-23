@@ -1,0 +1,22 @@
+DataBase: Shopping CartDB   
+Tables:   Products      |Customers	    |Cart	    |OrderHeader    |OrderDetails  |
+Columns:  product_id(pk)|customer_id(pk)|cart_id(pk)|order_id(pk)   |order_id(fk)  |
+	    product       |customer       |quantity   |customer_id(fk)|product_id(fk)|
+	    price         |                           |order_date     |quantity      |
+
+
+
+SELECT add_to_shopping_cart(1); --Run query to add Cold Drink
+SELECT * FROM cart;
+SELECT add_to_shopping_cart(2); --Run query to add Chips
+SELECT * FROM cart;
+SELECT add_to_shopping_cart(3); --Run query to add Bread
+SELECT * FROM cart;
+SELECT add_to_shopping_cart(4); --Run query to add Milk
+SELECT * FROM cart;
+SELECT add_to_shopping_cart(5); --Run query to add Chocolate
+SELECT * FROM cart;
+SELECT add_to_shopping_cart(6); --Run query to add Sweets
+SELECT * FROM cart;   
+
+

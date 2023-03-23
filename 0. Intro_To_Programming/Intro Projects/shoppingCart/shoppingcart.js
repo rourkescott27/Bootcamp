@@ -47,7 +47,7 @@ function display_all() {
         myTable += "<tr><td style='width: 100px; text-align: right;'>" + nums[i] + "</td>";
         myTable += "<td style='width: 100px; text-align: right;'>" + items[i] + "</td><";
         myTable += "<td style='width: 100px; text-align: right;'>" + prices[i] + "</td>";
-        myTable += "<td style='width: 100px; text-align: right;'>" + quantities[i] + "</td>";
+        myTable += "<td style='width: 100px; text-align: right;'>" + quantities[i] + "</td>"; 
         myTable += "<td style='width: 100px; text-align: right;'>" + totals[i] + "</td>";
         myTable += "<td><button onclick='add_selection(" + i + ")'>Add</button></td>";
         myTable += "<td><button onclick='remove_selection(" + i + ")'>Remove</button></td>";

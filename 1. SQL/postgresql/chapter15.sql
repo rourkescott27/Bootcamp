@@ -308,30 +308,4 @@ SELECT * FROM meat_poultry_egg_inspect
 WHERE company = 'testcompany';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 SELECT * FROM meat_poultry_egg_inspect;
