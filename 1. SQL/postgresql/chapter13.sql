@@ -302,7 +302,43 @@ ORDER BY score DESC
 LIMIT 5;
 
 -- try it yourself 1 --
+-- Answer: You can use either the standard SQL replace() function or the
+-- PostgreSQL regexp_replace() function:
+
+SELECT replace('Williams, Sr.', ', ', ' ');
+SELECT regexp_replace('Williams, Sr.', ', ', ' ');
+
+-- Answer: To capture just the suffixes, search for characters after a comma
+-- and space and place those inside a match group:
+
+SELECT (regexp_match('Williams, Sr.', '.*, (.*)'))[1];
 
 -- try it yourself 2 --
+WITH
+    word_list (word)
+AS
+    (
+        SELECT regexp_split_to_table(speech_text, '\s') AS word
+        FROM president_speeches
+        WHERE speech_date = '1974-01-30'
+    )
+
+SELECT lower(
+               replace(replace(replace(word, ',', ''), '.', ''), ':', '')
+             ) AS cleaned_word,
+       count(*)
+FROM word_list
+WHERE length(word) >= 5
+GROUP BY cleaned_word
+ORDER BY count(*) DESC;
+
 
 -- try it yourself 3 --
+SELECT president,
+       speech_date,
+       ts_rank_cd(search_speech_text, search_query, 2) AS rank_score
+FROM president_speeches,
+     to_tsquery('war & security & threat & enemy') search_query
+WHERE search_speech_text @@ search_query
+ORDER BY rank_score DESC
+LIMIT 5;
