@@ -199,22 +199,126 @@ CONCAT(UPPER(last_name), ',', LOWER(first_name)) AS new_name
 FROM patients
 ORDER BY first_name DESC;
 
+--Show the province_id(s), sum of height; where the total sum of its patient's height is greater than or equal to 7,000.
+SELECT 
+	province_id, 
+    SUM(height) AS sum_height
+FROM patients
+GROUP BY province_id
+HAVING sum_height >= 7000;
 
+--Show the difference between the largest weight and smallest weight for patients with the last name 'Maroni'
+SELECT MAX(weight) - MIN(weight) AS weight_diff
+FROM patients
+WHERE last_name = 'Maroni';
 
+--Show all of the days of the month (1-31) and how many admission_dates occurred on that day. Sort by the day with most admissions to least admissions.
+SELECT
+	DAY(admission_date) AS day_number,
+    COUNT(*) as number_of_admissions
+FROM admissions
+GROUP by day_number
+ORDER BY number_of_admissions DESC;
 
+--Show all columns for patient_id 542's most recent admission_date.
+SELECT *
+FROM admissions
+WHERE patient_id = 542
+GROUP BY patient_id
+HAVING 
+	admission_date = MAX(admission_date);
+	
 
+--Show patient_id, attending_doctor_id, and diagnosis for admissions that match one of the two criteria:
+--1. patient_id is an odd number and attending_doctor_id is either 1, 5, or 19.
+--2. attending_doctor_id contains a 2 and the length of patient_id is 3 characters.
+SELECT
+	patient_id,
+    attending_doctor_id,
+    diagnosis
+FROM admissions
+WHERE 
+	(
+      attending_doctor_id IN (1, 5, 19)
+      AND patient_id %2 !=0
+      )
+      or
+      (
+        attending_doctor_id LIKE '%2%'
+        AND LEN(patient_id) = 3
+      );
+	  
+--Show first_name, last_name, and the total number of admissions attended for each doctor. Every admission has been attended by a doctor.
+SELECT 
+	first_name,
+    last_name,
+    COUNT (*) AS total_admissions
+FROM admissions adms
+	INNER JOIN doctors dc
+    ON dc.doctor_id = adms.attending_doctor_id
+GROUP BY attending_doctor_id;
 
+--For each doctor, display their id, full name, and the first and last admission date they attended.
+SELECT 
+	doctor_id,
+	(first_name || ' '|| last_name),
+    MIN(admission_date) AS first_admission,
+    MAX(admission_date) AS last_admission
+FROM admissions a 
+	INNER JOIN doctors d
+    ON a.attending_doctor_id = d.doctor_id
+GROUP BY doctor_id;
 
+--Display the total amount of patients for each province. Order by descending.
+SELECT 
+	province_name,
+    COUNT(*) as patient_count
+FROM patients pid
+	JOIN province_names pn
+    ON pn.province_id = pid.province_id
+GROUP BY pid.province_id
+ORDER BY patient_count DESC;
 
+--For every admission, display the patient's full name, their admission diagnosis, and their doctor's full name who diagnosed their problem
+SELECT 
+	CONCAT(pid.first_name,' ',pid.last_name) AS patient_name,
+    CONCAT(dr.first_name,' ', dr.last_name) AS docter_name,
+    diagnosis 
+FROM patients pid
+	INNER join admissions adms
+    ON adms.patient_id = pid.patient_id
+    INNER JOIN doctors dr
+    ON dr.doctor_id = adms.attending_doctor_id;
 
+--Display the number of duplicate patients based on their first_name and last_name.
+SELECT 
+	first_name, 
+    last_name,
+    COUNT(*) AS num_of_duplicates
+FROM patients
+GROUP BY 
+	first_name,
+    last_name
+HAVING COUNT(*) > 1;
 
+--Display patient's full name,
+--height in the units feet rounded to 1 decimal,
+--weight in the unit pounds rounded to 0 decimals,
+--birth_date,
+--gender non abbreviated.
 
-
-
-
-
-
-
+--Convert CM to feet by dividing by 30.48.
+--Convert KG to pounds by multiplying by 2.205.
+SELECT CONCAT(first_name, ' ', last_name) AS full_name,
+ROUND(height/30.48, 1) AS height_in_feet,
+ROUND(weight*2.205, 0) AS weight_in_pounds,
+birth_date,
+CASE
+    WHEN gender = 'M' THEN 'Male'
+    WHEN gender = 'F' THEN 'Female'
+    ELSE 'Other'
+END AS gender
+FROM patients;
 
 
 
