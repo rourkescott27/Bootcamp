@@ -1,0 +1,26 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapeter 10 : Exercise 10.6</title>
+</head>
+
+<body>
+    <p class="animal">dog</p>
+    <div class="animal">cat</div>
+    <i class="animal">lion</i> <br>
+    <b class="animal">giraffe</b>
+
+    <script>
+        const myClass = document.querySelectorAll(".animal");
+        console.log(myClass);
+
+        for(let i = 0; i < myClass.length; i++) {
+            console.log("still looping", myClass[i]);
+        }
+    </script>
+</body>
+
+</html>
