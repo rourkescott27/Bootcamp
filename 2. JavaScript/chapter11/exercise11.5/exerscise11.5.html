@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Exercise 11.5</title>
+</head>
+
+<body>
+    <div class="output"></div>
+    <input type="text" name="message" placeholder="Your Message">
+    <button class="btn1">Button 1</button>
+    <button class="btn2">Button 2</button>
+    <div>
+        <button class="btn3">Log</button>
+    </div>
+
+    <script>
+        let output = document.querySelector('.output');
+        let inputEle = document.querySelector('input[name = "message"]'); // Is there another way to access this element property ?
+        let btn1 = document.querySelector('.btn1');
+        let btn2 = document.querySelector('.btn2');
+        let btn3 = document.querySelector('.btn3');
+        let log = [];
+
+        function capture(e) {  // This function will capture the event obj and add it to the log array
+            output.textContent = inputEle.value;
+            let ev = e.target;
+            console.dir(ev);
+            const temp = {
+                message: inputEle.value,
+                type: ev.type,
+                class: ev.className,
+                tag: ev.tagName
+            };
+            log.push(temp); // Pushing temp obj to the log array
+            inputEle.value = '';
+        }
+
+        btn1.addEventListener('click', capture);
+        btn2.addEventListener('click', capture);
+        btn3.addEventListener('click', (e) => {
+            console.log(log);
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Chapter 10 : Project 3 - Hangman Game</title>
+    <style>
+        .gameArea {
+
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .box,
+        .boxD {
+            display: inline-block;
+            padding: 5px;
+        }
+
+        .boxE {
+            display: inline-block;
+            width: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gameArea">
+        <div class="score"> </div>
+        <div class="puzzle"></div>
+        <div class="letters"></div>
+        <button>Start Game</button>
+    </div>
+    <script>
+        let myArray = ['patent', 'feedback', 'missile', 'support', 'software'];
+        const mainGame = {
+            current: '',
+            solution: '',
+            elementArr: [],
+            total: 0
+        }
+
+        let score = document.querySelector('.score');
+        let puzzle = document.querySelector('.puzzle');
+        let letters = document.querySelector('.letters');
+        let button = document.querySelector('button');
+        button.addEventListener('click', startGame);
+
+        // This function keeps the game going while there are still words in the array
+        function startGame() {
+            if (myArray.length > 0) {
+                button.style.display = 'none';
+                mainGame.elementArr = [];
+                mainGame.total = 0;
+                mainGame.current = myArray.shift();
+                mainGame.solution = mainGame.current.split('');
+                builder();
+            } else {
+                score.textContent = 'Well done you found all the words!!';
+            }
+        }
+
+        // This function selects a word out of the myArray and prepares the display for the game
+            function builder() {
+            letters.innerHTML = "";
+            puzzle.innerHTML = "";
+            // Pairing the minus placeholders corresponding to the current word
+            mainGame.solution.forEach((lett) => {
+                let div = createPageEle("div", puzzle, "-", "boxE");
+                if (lett == " ") {
+                    div.style.borderColor = "white";
+                    div.textContent = " ";
+                } else {
+                    mainGame.total++;
+                }
+                mainGame.elementArr.push(div);
+                updateScore();
+            });
+            // Preparing the display of the alphabet
+            for (let i = 0; i < 26; i++) {
+                let temp = String.fromCharCode(65 + i);
+                let div = createPageEle("div", letters, temp, "box");
+
+                let checker = function (e) {
+                    div.style.backgroundColor = "#ddd";
+                    div.classList.remove("box");
+                    div.classList.add("boxD");
+                    div.removeEventListener("click", checker);
+                    checkLetter(temp);
+                }
+                div.addEventListener("click", checker);
+            }
+        }
+        // Creating the display of the placeholders '-' by manipulating the html elements
+        function createPageEle(elType, parentEle, output, cla) {
+            let temp = document.createElement(elType);
+            temp.classList.add('boxE');
+            parentEle.append(temp);
+            temp.textContent = output;
+            return temp;
+        }
+        // The score is only updated when the clicked character matches
+        function updateScore() {
+            score.textContent = `You only have ${mainGame.total} letters left`;
+            if (mainGame.total <= 0) {
+                console.log('!--Game Over--!');
+                score.textContent = '!--Game Over--!';
+                button.style.display = 'block';
+            }
+        }
+        // This function checks if the clicked letter exists in the selected word
+        function checkLetter(letter) {
+            console.log(letter);
+            mainGame.solution.forEach((element, index) => {
+                if (element.toUpperCase() == letter) {
+                    mainGame.elementArr[index].textContent = letter;
+                    mainGame.total--;
+                    updateScore();
+                }
+            });
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

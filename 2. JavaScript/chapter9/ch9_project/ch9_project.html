@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9 : Project - Manipulating HTML elements with JavaScript</title>
+</head>
+
+<body>
+    <div class="output">
+        <h1>Hello</h1>
+        <div>Test</div>
+        <ul>
+            <li id="one">One</li>
+            <li class="red">Two</li>
+        </ul>
+        <div>Test</div>
+    </div>
+
+    <script>
+        // // 1. Select the element with the class output.
+        const op = document.querySelector(".output");
+
+        // // 2. Create another JavaScript object called mainList and select only the ul tag
+        // //    that is within the output element. Update the ID of that ul tag to mainList
+        const mainList = document.querySelector("ul");
+        mainList.id = "mainList";
+
+        // // 3. Search for the tagName of each div, and output them into the console as an
+        // //    array.
+        const divEle = document.querySelectorAll("div");
+        console.log(divEle);
+
+        // // 4. Using a for loop, set the ID of each of the div tags to id with a numeric value
+        // //    of the order they appear within output. Still within the loop, alternate the
+        // //    color of the contents of each element in output to be red or blue.
+        for (var i = 0; i < divEle.length; i++) {
+            divEle[i].id = "id" + (i + 1);
+            if (i % 2 === 0) {
+                divEle[i].style.color = "blue"
+            } else {
+                divEle[i].style.color = "red"
+            }
+        }
+
+    </script>
+</body>
+
+</html>

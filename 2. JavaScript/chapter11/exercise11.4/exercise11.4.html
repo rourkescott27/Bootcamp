@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Exercise 11.4</title>
+</head>
+
+<body>
+    <div class="colour"></div>
+    <script>
+        let ele = document.querySelector('.colour');
+        ele.textContent = 'Hello World';
+        ele.style.height = '250px';
+        ele.style.width = '250px';
+        ele.style.backgroundColor = 'aqua';
+
+        function output(colourStr, eventObj) {
+            console.log(eventObj.type); 
+            ele.style.backgroundColor = colourStr;
+        }
+
+        ele.addEventListener('mousedown', (el) => {
+            output('green', el);
+        })
+
+        ele.addEventListener('mouseover', (el) => {
+            output('red', el);
+        })
+
+        ele.addEventListener('mouseout', (el) => {
+            output('yellow', el);
+        })
+
+        ele.addEventListener('mouseup', (el) => {
+            output('blue', el);
+        })
+    </script>
+</body>
+
+</html>

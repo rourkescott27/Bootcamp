@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12 : Project 1 - Email Extractor</title>
+</head>
+
+<body>
+    <textarea name="txtarea" rows=2 cols=50></textarea> 
+    <button>Get Emails</button>
+    <textarea name="txtarea2" rows=2 cols=50></textarea>
+    
+    <script>
+        const firstArea = document.querySelector("textarea[name='txtarea']");
+        const secArea = document.querySelector("textarea[name='txtarea2']");
+        document.querySelector("button").addEventListener("click", lookUp);
+        
+        /*This function will get the text value inserted into the text area by the user
+        and look for the matches specified by the regular expression and then output
+        the matched email to the second text area*/
+        function lookUp() {
+            const rawTxt = firstArea.value;
+            const eData = rawTxt.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+            const holder = [];
+            /*The for loop will loop through the email entered by the user and match
+            each character and/or letter individually to the conditions of the 
+            regular expression, the paramater of the 'if' statement checks to see if
+            there is not a fault, relating to the regular expression, if no fault is found
+            the email entered will get pushsed to the 'holder' array*/
+            for (let x = 0; x < eData.length; x++) {
+                if (holder.indexOf(eData[x]) == -1) {
+                    holder.push(eData[x]);
+                }
+            }
+            /*This will convert the 'holder' array to a string using the '.join()' and 
+            also add the conversion to the second text area*/
+            secArea.value = holder.join(','); 
+        }
+    </script>
+</body>
+
+</html>

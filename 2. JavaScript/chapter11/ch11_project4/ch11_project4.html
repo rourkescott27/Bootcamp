@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Project 4 - Box clicker speed test game</title>
+
+    <style>
+        .output {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            margin: auto;
+            text-align: center;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            top: 50px;
+            left: 20%;
+            background-color: red;
+        }
+
+        .message {
+            text-align: center;
+            padding: 10px;
+            font-size: 1.3em;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="output"></div>
+    <div class="message"></div>
+
+    <script>
+        const output = document.querySelector('.output');
+        const message = document.querySelector('.message');
+        message.textContent = "Click the red square to start the game";
+        const box = document.createElement('div');
+        const game = {
+            timer: 0,
+            start: null
+        };
+        box.classList.add('box');
+        output.append(box);
+        box.addEventListener('click', (e) => { // When a click is registered on the red box it will initialize the arrow function
+            box.textContent = ""; // As soon as the click is registered the 'textContent' will be cleared, for the next bit of text to be inserted 
+            box.style.display = 'none'; // For every click that is registered, it will remove the red box displayed, momentarily until the 'setTimeout()' gets run again
+            game.timer = setTimeout(addBox, ranNum(3000)); //Accessing the timer property within the 'game' object, and calling the 'addbox()' and 'ranNum()' functions within the 'setInterval()' and adding a max time value of 3000ms
+            if (!game.start) { 
+                message.textContent = 'Loading....'; // If the game hasn't yet started this will be displayed to the user
+            }
+            else {
+                const cur = new Date().getTime(); // This code will get the current time in milliseconds
+                const dur = (cur - game.start) / 1000; // This will subtract the time from when the game started from the the current time, we divide by a 1000 to get sec instead of ms
+                message.textContent = `It took ${dur} seconds to click`; // This will display to the user how long it took for them to click the red box after the game has started each time
+            }
+        });
+        
+        //This function will randomly position the red box within the main div area
+        function addBox() {
+            message.textContent = 'Click it...';
+            game.start = new Date().getTime();
+            box.style.display = 'block';
+            box.style.left = ranNum(450) + 'px';
+            box.style.top = ranNum(450) + 'px';
+        }
+        
+        // This function will return a random number to be used elsewhere in the main part of the code
+        function ranNum(max) {
+            return Math.floor(Math.random() * max);
+        }
+    </script>
+</body>
+
+</html>

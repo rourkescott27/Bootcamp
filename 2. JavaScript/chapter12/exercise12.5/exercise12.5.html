@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12 : Exercise 12.5</title>
+</head>
+
+<body>
+    <script>
+
+        function test(val) {
+            try {
+                if (isNaN(val)) {
+                    throw "Not a number";
+                } else {
+                    console.log("Got number");
+                }
+
+            } catch (e) {
+                console.error(e);
+            } finally {
+                console.log(`Done ${val}`);
+            }
+        }
+        test('a');
+        test(100);
+
+    </script>
+</body>
+
+</html>

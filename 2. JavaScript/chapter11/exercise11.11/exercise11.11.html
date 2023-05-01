@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Exercise 11.11</title>
+
+    <style>
+        div {
+            background-color: aquamarine;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="block"></div>
+
+    <script>
+        let divEle = document.querySelector('#block'); // Capturing the div element to use in the code
+        let moveObj = {
+            speed: 10,
+            direction: 1,
+            position: 0
+        }
+
+        divEle.addEventListener('click', moveBlock);
+
+        /*The moveBlock() function will run the setInterval() 30 times, when the 
+        condition is satisfied it will clear the interval*/
+        function moveBlock() { 
+            let x = 30;
+            setInterval(function () {
+                if (x < 1) {
+                    clearInterval();
+                } else {
+                    if (moveObj.position > 800 || moveObj.position < 0) {
+                        moveObj.direction *= -1;
+                    }
+                    x--;
+                    moveObj.position += x * moveObj.direction;
+                    divEle.style.left = moveObj.position + 'px';
+                    console.log(moveObj.position);
+                }
+            }, 2);
+        }
+    </script>
+</body>
+
+</html>

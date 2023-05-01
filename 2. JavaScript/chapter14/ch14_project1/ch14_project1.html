@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 14 : Project 1 - Matrix Effect</title>
+</head>
+
+<body>
+    <div class="output"></div>
+    <script>
+        // Creating and selecting the canvas element 
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        //
+        // Setting new values for the element attribute
+        canvas.setAttribute("width", "1510");
+        canvas.setAttribute("height", "720");
+        //
+        document.body.prepend(canvas);
+        const colVal = [];
+        for (let x = 0; x < 500; x++) {
+            colVal.push(0);
+        }
+
+        // This function is mainly doing the styling for the animation
+        function matrix() {
+            // sets the colour and opacity
+            ctx.fillStyle = "rgba(0,0,0,.05)";
+            /* sets the starting point of the x and y axis aswell as the height and
+            width of the canvas element*/
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "green"; // sets the colour
+            /* The '.map()' method iterates over the 'colVal' array and uses a callback
+            function to modify the array elements as it iterates over it */
+            colVal.map((posY, index) => {
+                /* Using a ternary operator combined with 'Math.random()' to produce
+                the zero's and one's randomly*/
+                let output = Math.random() < 0.5 ? 0 : 1; 
+                // Specifying the x-axis coordinate
+                let posX = (index * 10) + 10;
+                /*The 'fillText()' method specifies at which point to start drawing
+                the x and y axis and also what text to render into the context*/
+                ctx.fillText(output, posX, posY);
+                if (posY > 1000 + Math.random() * 50) {
+                    colVal[index] = 0;
+                } else {
+                    colVal[index] = posY + 10;
+                }
+            });
+        }
+        // We use the 'setInterval()' to call the 'matrix()' function every 50ms 
+        setInterval(matrix, 50);
+
+    </script>
+</body>
+
+</html>

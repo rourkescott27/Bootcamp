@@ -1,0 +1,71 @@
+    <!doctype html>
+<html>
+
+<head>
+    <title>JS Tester</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background-color: white;
+        }
+
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Prepares the display of the game -->
+    <div class="box">1
+        <div id="dragme" draggable="true">
+            Drag Me Please!
+        </div>
+    </div>
+    <div class="box">2</div>
+    <script>
+        const draggable = document.querySelector('#dragme');
+        draggable.addEventListener("dragstart", e => {
+            // Either one works
+            draggable.style.opacity = 0.5;
+            // e.target.style.opacity = 0.5;
+
+            console.log("dragstart");
+        });
+        draggable.addEventListener("dragend", e => {
+            // Either one works
+            draggable.style.opacity = 1;
+            // e.target.style.opacity = 1;
+            console.log("dragend");
+        });
+
+        // When the drag is done the colour is swapped between the boxes.
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach(box => {
+            box.addEventListener("dragenter", e => {
+                box.classList.add('red');
+                console.log("dragenter");
+            });
+            box.addEventListener("dragover", e => {
+                // By default, data/elements cannot be dropped in other elements. 
+                // To allow a drop, we must prevent the default handling of the element. 
+                // This is done by calling the event.preventDefault() method for the ondragover event.
+                e.preventDefault();
+                console.log("dragover");
+            });
+            box.addEventListener("dragleave", e => {
+                box.classList.remove('red');
+                console.log("dragleave");
+            });
+            box.addEventListener("drop", e => {
+                e.preventDefault();
+                e.target.appendChild(draggable);
+                console.log("drop");
+            });
+        });
+    </script>
+</body>
+
+</html>

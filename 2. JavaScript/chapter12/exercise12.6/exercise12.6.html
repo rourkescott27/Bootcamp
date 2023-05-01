@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12 : Exercise 12.6</title>
+</head>
+
+<body>
+    <script>
+        console.log(document.cookie);
+        console.log(rCookie("test1"));
+        console.log(rCookie("test"));
+        cCookie("test1", "new Cookie", 30);
+        dCookie("test2");
+        function cCookie(cName, value, days) {
+            if (days) {
+                const d = new Date();
+                d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+                let e = "; expires=" + d.toUTCString();
+                document.cookie = cName + "=" + value + e + "; path=/";
+            }
+        }
+        function rCookie(cName) {
+            let cookieValue = false;
+            let arr = document.cookie.split("; ");
+            arr.forEach(str => {
+                const cookie = str.split("=");
+                if (cookie[0] == cName) {
+                    cookieValue = cookie[1];
+                }
+            });
+            return cookieValue;
+        }
+        function dCookie(cName) {
+            cCookie(cName, "", -1);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Project 1 - Build your own analytics</title>
+
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            border: 1px solid black
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="box" id="box1">Box 1</div>
+        <div class="box" id="box2">Box 2</div>
+        <div class="box" id="box3">Box 3</div>
+        <div class="box" id="box4">Box 4</div>
+    </div>
+    
+    <script>
+        let tracker = [];
+        let parentDiv = document.querySelector('.main');
+
+        parentDiv.addEventListener('click', clickHandler);
+
+        function clickHandler(e) {
+            let el = e.target; // Getting the target element an stoing it to 'el'
+            if(el.id) {        //The if() checks if the elements have #id's
+                let temp = {};
+                /////////////////////////////
+                temp.content = el.textContent;
+                temp.id = el.id;               /*Adding the element object to a temp array*/
+                temp.tagName = el.tagname;
+                temp.className = el.className;
+                /////////////////////////////
+                console.dir(el);
+                tracker.push(temp);
+                console.log(tracker);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

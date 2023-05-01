@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12 : Exercise 12.1</title>
+</head>
+
+<body>
+    <div id="output">Complete JavaScript Course</div>
+    Search for:
+    <input id="sText" type="text">
+    <br> Replace with:
+    <input id="rText" type="text">
+    <br>
+    <button>Replace</button>
+
+    <script>
+        //Capturing all the elements for easy access
+        const output = document.getElementById("output");
+        const findValue = document.getElementById("sText");
+        const replaceValue = document.getElementById("rText");
+
+        // Adding a 'click' event to the button, which when triggered will call the look up function
+        document.querySelector("button").addEventListener("click", lookUp);
+
+        /*The lookUp() function will match the letter entered into the first input 
+        div, to the textContent of the 'output' div and replace it with the letter 
+        entered into the second input div*/
+        function lookUp() {
+            const s = output.textContent;
+            const rt = replaceValue.value;
+            const re = new RegExp(findValue.value, "gi");
+            if (s.match(re)) {
+                let newValue = s.replace(re, rt);
+                output.textContent = newValue;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

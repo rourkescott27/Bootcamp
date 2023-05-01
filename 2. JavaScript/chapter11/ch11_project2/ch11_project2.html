@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Project 2 - Star Rating System</title>
+
+    <style>
+        .stars ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .star {
+            font-size: 2em;
+            color: #ddd;
+            display: inline-block;
+        }
+
+        .orange {
+            color: orange;
+        }
+
+        .output {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="stars">
+        <li class="star">&#10029;</li>
+        <li class="star">&#10029;</li>
+        <li class="star">&#10029;</li>
+        <li class="star">&#10029;</li>
+        <li class="star">&#10029;</li>
+    </ul>
+    <div class="output"></div>
+
+    <script>
+        let starsParent = document.querySelector('.stars');
+        let starChild = document.querySelectorAll('.star');
+        let output = document.querySelector('.output');
+
+        // Adding click events to all the li elements and calling the starRate function when the user clicks the stars
+        starChild.forEach((star, index) => {   
+            star.starValue = (index + 1);
+            star.addEventListener('click', starRate);
+        });
+
+        function starRate(e) {
+            // Will display a message to the user relating to how many stars they selected 
+            output.innerHTML = `You rated this ${e.target.starValue} stars`;
+            // Depending on which stars are clicked, or up until a certain index the stars wil change colour to orange 
+            starChild.forEach((star, index) => {
+                if (index < e.target.starValue) {
+                    star.classList.add('orange'); // Why can you only add orange as the star colour
+                } else {
+                    star.classList.remove('orange');
+                }
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>

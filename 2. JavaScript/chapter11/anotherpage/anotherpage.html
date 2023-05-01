@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+
+<body>
+    <script>
+        let q = window.location.search;
+        let params = new URLSearchParams(q);
+        let fName = params.get("fName");
+        let lName = params.get("lName");
+        let age = params.get("age");
+        alert(`Hello ${fName} ${lName} you are ${age} years old!`);
+    </script>
+</body>
+
+</html>

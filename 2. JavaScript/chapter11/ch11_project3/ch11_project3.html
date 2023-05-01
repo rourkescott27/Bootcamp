@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Project 3 - Mouse position tracker </title>
+
+    <style>
+        .holder {
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .active {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="holder">
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const holder = document.querySelector(".holder"); // Selecting the holder class using the querySelector() and saving it to a variable called holder
+
+        holder.addEventListener("mouseover", (e) => { // Adding a 'mouseover' event  that will add the 'active' class to the holder div if the cursor enters the holder div
+            e.target.classList.add("active");
+        });
+        holder.addEventListener("mouseout", (e) => { // Adding a 'mouseout' event that will remove the 'active' class once the cursor leaves the holder div 
+            e.target.classList.remove("active");
+        });
+        holder.addEventListener("mousemove", coordinateLoc); // Adding a 'mousemove' event that will trigger the coordinate function as soon as the cursor moves inside of the parent div area
+
+        function coordinateLoc() { // The coordinatLoc function actively displays the mouse position within the parent div area and outputs the current location of the cursor to the 'output' div by using .innerHtml           
+            let html = "X:" + event.clientX + " | Y:" + event.clientY;
+            document.getElementById("output").innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>

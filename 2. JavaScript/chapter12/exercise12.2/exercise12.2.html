@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12 : Exercise 12.2</title>
+</head>
+
+<body>
+    <div class="output"></div>
+    <input type="text" placeholder="Enter Email">
+    <button>Check</button>
+    <script>
+        //Capturing all the elements for easy access
+        const output = document.querySelector(".output");
+        const emailVal = document.querySelector("input");
+        const btn = document.querySelector("button");
+        
+        // Regular Expression that will check for the following matches
+        const emailExp = /([A-Za-z0-9._-]+@[A-Za-z0-9._-]+\.[A-Za-z0-9]+)\w+/; 
+        
+        btn.addEventListener("click", (e) => {
+            const val = emailVal.value;
+            const result = emailExp.test(val);
+            let response = "";
+            if (!result) {
+                response = "Invalid Email";
+                output.style.color = "red";
+            } else {
+                response = "Valid Email";
+                output.style.color = "green";
+            }
+            emailVal.value = "";
+            output.textContent = response;
+        });
+    </script>
+</body>
+
+</html>

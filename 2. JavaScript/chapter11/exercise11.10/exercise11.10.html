@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Exercise 11.10</title>
+</head>
+
+<body>
+    <form action="exercise11.10.html" method="get">
+        <input type="text" name="first" placeholder="First Name">
+        <br><input type="text" name="last" placeholder="Last Name">
+        <br><input type="number" name="age" placeholder="Age">
+        <br><input type="submit" value="Submit">
+    </form>
+
+    <script>
+        let form = document.querySelector('form');
+        let email = document.querySelector('#email'); 
+
+        function strLength(str) {
+            console.log(str.length);
+            if (str < 3) {
+                return true;
+            }
+            return false;
+        }
+
+        form.addEventListener('submit', (e) => {
+            let error = false;
+
+            if (strLength(form.first.value)) {
+                console.log('First Name Required');
+                error = true;
+            }
+            if (strLength(form.last.value)) {
+                console.log('Last Name Required');
+                error = true;
+            }
+            if (form.age.value < 19) {
+                console.log('You have to be 19 or older!');
+                error = true;
+            }
+            if (error) {
+                e.preventDefault();
+                console.log('Please check if you have entered the right information!');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11 : Exercise 11.2</title>
+</head>
+
+<body>
+    <div>Red</div>
+    <div>Green</div>
+    <div>Blue</div>
+    <div>Yellow</div>
+    <div>Orange</div>
+    <div>Aqua</div>
+
+    <script>
+        let divs = document.querySelectorAll('div');
+        divs.forEach((ele) => {
+            ele.addEventListener('click', () => {
+                document.body.style.backgroundColor = ele.textContent;
+            });
+        })
+    </script>
+</body>
+
+</html>

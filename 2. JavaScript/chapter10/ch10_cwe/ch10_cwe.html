@@ -1,0 +1,477 @@
+<!--Basic DOM traversing-->
+<!--html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10 : Classwork Exercises</title>
+</head>
+
+<body>
+    <h1>Let's find the treasure</h1>
+    <div id="forest">
+        <div id="tree1">
+            <div id="squirrel"></div>
+            <div id="flower"></div>
+        </div>
+        <div id="tree2">
+            <div id="shrubbery">
+                <div id="treasure"></div>
+            </div>
+            <div id="mushroom">
+                <div id="bug"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.dir(document.body);
+
+        console.dir(document.body.children.forest.children.tree2.children.
+            shrubbery.children.treasure);
+
+        console.dir(document.body.childNodes[3].childNodes[3].childNodes[1].
+            children.treasure);
+
+        console.dir(document.body.children.forest.children.tree2.parentElement);
+
+        console.dir(document.body.children.forest.children.tree2);
+
+        console.dir(document.body.children.forest.children.tree2.previousElementSibling);
+        
+        console.dir(document.body.children.forest.children.tree1.nextElementSibling);
+    </script>
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Selecting elements as objects -->
+
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Welcome page</h1>
+    <p id="greeting">
+        Hi!
+    </p>
+    <script>
+        console.dir(document.body.children.greeting);
+        
+        //Changing innerText
+        //console.dir(document.body.children.greeting.innerText = "Bye!");
+
+        // Changing innerHTML
+        //console.dir(document.body.children.greeting.innerHTML = "<b>Bye!</b>");
+
+    </script>
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Accessing elements in the DOM -->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Just an example</h1>
+    <div id="one" class="example">Hi!</div>
+    <div id="two" class="example">Hi!</div>
+    <div id="three" class="something">Hi!</div>
+<script>
+    // Accessing elements by ID
+    console.dir(document.getElementById("two"));
+
+</script>
+</body>
+
+</html-->
+
+<!--html>
+
+<body>
+    <h1 style="color:pink;">Just an example</h1>
+    <div id="one" class="example">Hi!</div>
+    <div id="two" class="example">Hi!</div>
+    <div id="three" class="something">Hi!</div>
+
+    <script>
+        //--Accessing elements by tag name--//
+        // console.log(document.getElementById("two"));
+        // console.log(document.getElementById("three"));
+        // const divs = document.getElementsByTagName("div");
+        // console.log(divs);
+        // console.log(document.getElementsByTagName("div").item(1));
+        // console.log(document.getElementsByTagName("div").namedItem("one"));
+        
+        //--Accessing elements by class name--//
+        //console.log(document.getElementsByClassName("example"));
+
+        //--Accessing elements with a CSS selector--//
+        // console.log(document.querySelectorAll("p"));
+
+    
+    </script>
+</body>
+
+</html-->
+
+
+<!--------------------------------------------------------------------------------->
+<!--Element click handler #1-->
+
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <div id="one" onclick="stop()">Don't click here!</div>
+    <script>
+        function stop() {
+            alert("Ouch! Stop it!");
+        }
+    </script>
+
+</body>
+
+</html-->
+
+
+<!--------------------------------------------------------------------------------->
+<!--Element click handler #2-->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <div id="one" onclick="alert('Ouch! Stop it!')">Don't click here!</div>
+</body>
+
+</html-->
+
+
+<!--------------------------------------------------------------------------------->
+<!--Element click handler #3-->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <div id="one">Don't click here!</div>
+
+    <script>
+        document.getElementById("one").onclick = function () {
+            alert("Auch! Stop!");
+        }
+    </script>
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- This and the DOM -->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <button onclick="reveal(this)">Click here!</button>
+    <script>
+        function reveal(el) {
+            //console.log(el);
+            //console.log(el.parentElement);
+            console.log(el.innerText);
+        }
+    </script>
+
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Manipulating element style -->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <p id="magic">I might disappear and appear.</p>
+    <button onclick="toggleDisplay()">Magic!</button>
+    
+    <script>
+        function toggleDisplay() {
+            let p = document.getElementById("magic");
+            if (p.style.display === "none") {
+                p.style.display = "block";
+            } else {
+                p.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html-->
+<!--------------------------------------------------------------------------------->
+<!--!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        div {
+            height: 50px;
+            width: 50px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="red"></div>
+    <div id="orange"></div>
+    <div id="yellow"></div>
+    <div id="green"></div>
+    <div id="blue"></div>
+    <div id="indigo"></div>
+    <div id="violet"></div>
+    
+    <script>
+        function rainbowify() {
+            let divs = document.getElementsByTagName("div");
+            console.log(divs);
+            for (let i = 0; i < divs.length; i++) {
+                divs[i].style.backgroundColor = divs[i].id;
+            }
+        }
+    </script>
+    <button onclick="rainbowify()">Make me a rainbow</button>
+
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Changing the classes of an element -->
+<!-- Adding classes to elements -->
+<!--!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .hide {
+            display: none;
+        }
+
+        .square {
+            height: 100px;
+            width: 100px;
+            background-color: yellow;
+        }
+
+        .square.blue {
+            background-color: blue;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        function disappear() {
+            document.getElementById("shape").classList.add("hide");
+        }
+    </script>
+
+
+    <div id="shape" class="square blue"></div>
+    <button onclick="disappear()">Disappear!</button>
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Removing classes from elements -->
+
+<!--!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .square {
+            height: 100px;
+            width: 100px;
+            background-color: yellow;
+        }
+
+        .square.blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function change() {
+            document.getElementById("shape").classList.remove("blue");
+        }
+    </script>
+
+    <div id="shape" class="square blue"></div>
+    <button onclick="change()">Change!</button>
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Toggling classes -->
+<!--!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .hide {
+            display: none;
+        }
+
+        .square {
+            height: 100px;
+            width: 100px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function changeVisibility() {
+            document.getElementById("shape").classList.toggle("hide");
+        }
+    </script>
+
+    <div id="shape" class="square"></div>
+    <button onclick="changeVisibility()">Magic!</button>
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Manipulating attributes -->
+<!--!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        div {
+            height: 100px;
+            width: 100px;
+            background-color: yellow;
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function changeAttr() {
+            let el = document.getElementById("shape");
+            el.setAttribute("style", "background-color:red;border:1px solid black");
+            el.setAttribute("id", "new");
+            el.setAttribute("class", "circle");
+        }
+    </script>
+
+    <div id="shape" class="square"></div>
+
+    <button onclick="changeAttr()">Change attributes...</button>
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Event listeners on elements -->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+
+    <div id="square" style="width:100px;height:100px;background-color:grey;">Click for magic</div>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("square").addEventListener("click", changeColor);
+        }
+        function changeColor() {
+            let red = Math.floor(Math.random() * 256);
+            let green = Math.floor(Math.random() * 256);
+            let blue = Math.floor(Math.random() * 256);
+            this.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+        }
+    </script>
+</body>
+
+</html>
+
+<!--------------------------------------------------------------------------------->
+<!-- Creating new elements -->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <button onclick="addRandomNumber()">Add a number</button>
+
+    <script>
+        function addRandomNumber() {
+            let el = document.createElement("p");
+            el.innerText = Math.floor(Math.random() * 100);
+            document.body.appendChild(el);
+        }
+    </script>
+</body>
+
+</html-->
+
+<!--------------------------------------------------------------------------------->
+<!-- Self-check quiz #1 -->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <div id="output">Complete JavaScript Course </div>
+    <script>
+        var output = document.getElementById('output');
+        output.innerText = "Hello <br> World";
+    </script>
+</body>
+
+
+</html-->
+
+
+<!-- Self-check quiz #2 -->
+<!--!DOCTYPE html>
+<html>
+
+<body>
+    <div id="output">Complete JavaScript Course </div>
+    <script>
+        document.getElementById('output').innerHTML = "Hello <br> World";
+    </script>
+</body>
+
+
+</html-->
+
+<!-- Self-check quiz #3 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="output">Hello World</div>
+    <input type="text" id="val" value="JavaScript">
+    <script>
+        document.getElementById('val').value = document.getElementById('output').innerHTML;
+    </script>
+</body>
+
+</html>

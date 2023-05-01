@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chapter 10 : Project 2 - Interactive Voting System</title>
+</head>
+
+<body>
+    <div id="message">Complete JavaScript Course</div>
+    <div>
+        <input type="text" id="addFriend">
+        <input type="button" id="addNew" value="Add Friend">
+    </div>
+    <table id="output"></table>
+    <script>
+        window.onload = create;
+        myArr = ['Ben', 'Matt', 'Michael', 'Jordan'];
+        let divEle = document.getElementById('message');
+        let inputEle1 = document.getElementById('addFriend');
+        let inputEle2 = document.getElementById('addNew');
+        let outputEle = document.getElementById('output');
+
+        addNew.onclick = function (el) {
+            let newInputVal = inputEle1.value;
+            add(newInputVal, myArr.length, 0);
+            myArr.push(newInputVal);
+        }
+
+        function create() {
+            myArr.forEach((item, index) => {
+                add(item, index, 0);
+            });
+        }
+
+        function add(name, index, counter) {  
+            let tr = document.createElement('tr');
+            let td1 = document.createElement('td');
+            td1.classList.add('box');
+            td1.textContent = index + 1;
+            let td2 = document.createElement('td');
+            td2.textContent = name;
+            let td3 = document.createElement('td');
+            td3.textContent = counter;
+            tr.append(td1);
+            tr.append(td2);
+            tr.append(td3);
+            tr.onclick = function () {
+                console.log(tr.lastChild);
+                let val = Number(tr.lastChild.textContent);
+                val++;
+                tr.lastChild.textContent = val;
+            }
+            outputEle.appendChild(tr);
+        }
+    </script>
+</body>
+
+</html>
