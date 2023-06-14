@@ -1,0 +1,70 @@
+import React, { Component } from 'react';
+import TodoList from './TodoList';
+
+class TodoApp extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            inputData: "",
+            todoItems: []
+        }
+    }
+
+    // **
+    // Updates the state of the input field
+    changeTodoInput = (event) => {
+        this.setState({ inputData: event.target.value })
+    }
+
+    // **
+    // Updates the state of the "To do List" by adding new data once the "add" button is clicked
+    addTodo = (event) => {
+        if (this.state.inputData !== '') {
+            let newTodoItems = [...this.state.todoItems, this.state.inputData];
+            this.setState({ todoItems: newTodoItems, inputData: "" })
+        }
+    }
+
+    // **
+    // Updates the state of the "To do List" by removing data once the "delete" button is clicked
+    deleteTodo = (index) => {
+        let todoItems = [...this.state.todoItems];
+        let newTodoItems = todoItems.filter((value, key) => {
+            return index !== key
+        })
+        this.setState({ todoItems: newTodoItems })
+    }
+
+    render() {
+        return (
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-m-4'>
+                        <h3 className='text-center'>React Todo App </h3>
+                        <div className='input-group'>
+                            <input
+                                type='text'
+                                placeholder="Add to your To Do's"
+                                className='form-control'
+                                onChange={this.changeTodoInput}
+                                value={this.state.inputData}
+                            />
+                            <div className='input-group-append'>
+                                <span className='btn btn-success' onClick={this.addTodo}>
+                                    Add
+                                </span>
+                            </div>
+                        </div>
+                        <br />
+                        <TodoList items={this.state.todoItems} deleteTodo={this.deleteTodo} />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+
+}
+
+export default TodoApp;
