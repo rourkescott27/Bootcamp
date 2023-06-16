@@ -7,7 +7,7 @@ function Items({ data }) {
                     return (
                         <div className="col-sm-3 my-3" key={id}>
                             <div className="card bg-light text-center">
-                                <img src={image} alt="coding language" className="img-fluid" style={{ height: "200px" }} />
+                                <img src={image} alt={image.name} className="img-fluid" style={{ height: "200px" }} />
 
                                 <h3>{title}</h3>
                                 <p>{description}</p>
