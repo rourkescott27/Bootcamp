@@ -1,0 +1,21 @@
+{
+  "name": "one-to-many",
+  "version": "1.0.0",
+  "description": "Demonstration of relationships in MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mongoose",
+    "nodejs",
+    "one-to-many",
+    "mongodb"
+  ],
+  "author": "Rourke Scott",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.7.6"
+  }
+}

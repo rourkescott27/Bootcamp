@@ -9,7 +9,7 @@ function store() { //stores items in the localStorage
     }
 
     window.localStorage.setItem(key, JSON.stringify(car));
-    //converting object to string
+    //converting object to a JSON string
 }
 
 function retrieveRecords() { //retrieves items in the localStorage
