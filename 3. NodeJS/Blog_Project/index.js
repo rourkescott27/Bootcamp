@@ -59,7 +59,7 @@ app.use('/posts/store', validateMiddleware);
 //*
 app.use("*", (req, res, next) => {
     loggedIn = req.session.userId
-    next()
+    next();
 });
 
 //* Controller routes

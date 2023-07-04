@@ -22,7 +22,9 @@ const blogPostSchema = new Schema({
         type: Date,
         default: new Date()
     },
-    image: String
+    image: {
+        type: String, 
+        required: [true, "Please upload an image"]}
 });
 
 // Accessing the database

@@ -14,11 +14,14 @@ module.exports = (req, res) => {
                     res.redirect('/');
                 }
                 else {
+                    req.flash('error', 'Password incorrect.');
+                    req.flash('data', req.body);
                     res.redirect('/auth/login');
                 }
             })
         }
         else {
+            req.flash('error', 'Username is incorrect.')
             res.redirect('/auth/login');
         }
     })
