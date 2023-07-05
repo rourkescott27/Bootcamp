@@ -1,6 +1,6 @@
 "use strict";
 
-// Improting bcrypt package an users model
+// Importing bcrypt package an users model
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
 
@@ -16,6 +16,7 @@ module.exports = (req, res) => {
                 else {
                     req.flash('error', 'Password incorrect.');
                     req.flash('data', req.body);
+                    // console.log("flash password error");
                     res.redirect('/auth/login');
                 }
             })
@@ -25,6 +26,7 @@ module.exports = (req, res) => {
             res.redirect('/auth/login');
         }
     })
+    // console.log("login user");
 }
 
 // *Extracting the username and password from the user login with req.body

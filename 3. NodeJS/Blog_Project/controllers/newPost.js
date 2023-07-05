@@ -1,13 +1,5 @@
 "use strict";
 
-// module.exports = (req, res) => {
-//     // Checks for a session id before allowing the user to create a blog post
-//     if (req.session.userId) {
-//         return res.render("create");
-//     }
-//     res.redirect('/auth/login');
-// }
-
 module.exports = (req, res) => {
     var title = ""
     var description = ""
@@ -23,8 +15,6 @@ module.exports = (req, res) => {
     res.render('create', {
         errors: req.flash('validationErrors'), // Retrieves errors from the session
         title,
-        //  title: title,
-        // body: description,
         createPost: true
     })
 }

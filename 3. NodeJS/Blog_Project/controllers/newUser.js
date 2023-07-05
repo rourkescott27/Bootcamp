@@ -16,7 +16,5 @@ module.exports = (req, res) => {
         errors: req.flash('validationErrors'),
         username,
         password // Retrieves errors from the session
-        // username: username,
-        // password: password
     })
 }

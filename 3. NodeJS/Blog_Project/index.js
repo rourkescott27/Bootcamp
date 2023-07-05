@@ -53,8 +53,7 @@ app.use(expressSession({
 
 app.use(flash());
 
-// Validates new posts through "validationMiddleware.js"
-app.use('/posts/store', validateMiddleware);
+// validateMiddleware was causing issues with flash messages
 
 //*
 app.use("*", (req, res, next) => {
