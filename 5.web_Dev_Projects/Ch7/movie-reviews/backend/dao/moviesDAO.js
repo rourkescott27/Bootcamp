@@ -1,5 +1,5 @@
 // Stores reference to the DB
-let movies
+let movies;
 
 export default class MoviesDAO {
     static async injectDB(conn) {
@@ -22,10 +22,10 @@ export default class MoviesDAO {
     } = {}) {
         let query
         if (filters) {
-            if ("title" in filters) {
-                query = { $text: { search: filters['title'] } }
-            } else if ("rated" in filters) {
-                query = { "rated": { $eq: filters['rated'] } }
+            if (filters.hasOwnProperty('title')) {
+                query = { $text: { $search: filters['title'] } }
+            } else if (filters.hasOwnProperty("rated")) {
+                query = { "rated": filters['rated'] }
             }
         }
 
@@ -41,7 +41,7 @@ export default class MoviesDAO {
         }
         catch (e) {
             console.error(`Unable to issue find command, ${e}`);
-            return { moviesList: [], totalNumMovies }
+            return { moviesList: [], totalNumMovies: 0 }
         }
     }
 }

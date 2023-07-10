@@ -42,7 +42,7 @@ export default class MoviesDAO {
         }
         catch (e) {
             console.error(`Unable to issue find command, ${e}`);
-            return { moviesList: [], totalNumMovies }
+            return { moviesList: [], totalNumMovies: 0 }
         }
     }
 

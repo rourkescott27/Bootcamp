@@ -1,5 +1,6 @@
 "use strict";
 
+// const users = require('../models/users');
 // Renders register.ejs
 module.exports = (req, res) => {
     var username = "";
@@ -10,8 +11,8 @@ module.exports = (req, res) => {
         username = data.username
         password = data.password
     }
-    console.log(username, password);
-    console.log(data);
+    // console.log(username, password);
+    // console.log(data);
     res.render('register', {
         errors: req.flash('validationErrors'),
         username,

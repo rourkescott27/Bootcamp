@@ -13,7 +13,7 @@ export default class ReviewsDao {
                 conn.db(process.env.MOVIEREVIEWS_NS).collection('reviews')
         }
         catch (e) {
-            console.error(`Unable to establish connection handle in reviewDAO: ${e}`)
+            console.error(`Unable to establish connection handle in reviewsDAO: ${e}`)
         }
     }
 
