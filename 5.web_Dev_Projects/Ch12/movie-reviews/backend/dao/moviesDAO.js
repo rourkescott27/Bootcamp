@@ -46,7 +46,7 @@ export default class MoviesDAO {
         }
     }
 
-    static async apiGetRatings() {
+    static async getRatings() {
         let ratings = [];
         try {
             ratings = await movies.distinct("rated");
@@ -58,7 +58,7 @@ export default class MoviesDAO {
         }
     }
 
-    static async apiGetMovieById(id) {
+    static async getMovieById(id) {
         try {
             return await movies.aggregate([
                 {
