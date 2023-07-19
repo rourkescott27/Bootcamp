@@ -77,7 +77,7 @@ const Movie = props => {
                 <Media key={index}>
                   <Media.Body>
                   <h5>
-                     {review.name + " reviewed on "} {moment(review.date).format("Do MMMM YYYY")}
+                     {review.name+" reviewed on "} {moment(review.date).format("Do MMMM YYYY")}
                   </h5>             
 
                     <p>{review.review}</p>
