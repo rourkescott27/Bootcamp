@@ -62,7 +62,7 @@ function Movie(props) {
                             return (
                                 <Media key={index}>
                                     <Media.Body>
-                                        <h5>{review.name + " reviewed on "}{moment(review.date).format("Do MMMM YYYY")}</h5>
+                                        <h5>{review.name  + " reviewed on "}{moment(review.date).format("Do MMMM YYYY")}</h5>
                                         <p>{review.review}</p>
                                         {props.user && props.user.id === review.user_id &&
                                             <Row>
