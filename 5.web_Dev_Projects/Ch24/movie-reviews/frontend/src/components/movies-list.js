@@ -162,7 +162,7 @@ const MoviesList = props => {
                     })}
                 </Row>
                 <br />
-                Showing Page: {currentPage}.
+                Showing Page: {currentPage}
                 <Button variant='link'
                     onClick={() => { setCurrentPage(currentPage + 1) }}
                 >
