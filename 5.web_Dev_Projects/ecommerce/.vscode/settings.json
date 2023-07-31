@@ -1,0 +1,8 @@
+{
+    "reactSnippets.settings.languageScopes": "typescript,typescriptreact,javascript,javascriptreact",
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.wordBasedSuggestionsMode": "allDocuments",
+    "editor.suggest.showSnippets": true,
+    "reactSnippets.settings.prettierEnabled": true
+}
