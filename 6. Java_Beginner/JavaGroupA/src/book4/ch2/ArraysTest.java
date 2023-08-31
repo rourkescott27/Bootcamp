@@ -36,20 +36,20 @@ public class ArraysTest
 //            System.out.println(numbers[i]);
 //        }
 
-//        System.out.print("How many players? ");
-//        int count = sc.nextInt(); // sc is a Scanner
-//        sc.nextLine();
-//        String[] players = new String[count];
-//        for (int i = 0; i < count; i++)
-//        {
-//            System.out.println("Enter a player: ");
-//            players[i] = sc.nextLine();
-//        }
-//        System.out.println("The players are: \n");
-//        for (int i = 0; i < count; i++)
-//        {
-//            System.out.println(players[i]);
-//        }
+        System.out.print("How many players? ");
+        int count = sc.nextInt(); // sc is a Scanner
+        sc.nextLine();
+        String[] players = new String[count];
+        for (int i = 0; i < count; i++)
+        {
+            System.out.println("Enter a player: ");
+            players[i] = sc.nextLine();
+        }
+        System.out.println("The players are: \n");
+        for (int i = 0; i < count; i++)
+        {
+            System.out.println(players[i]);
+        }
 
 //        int[] startValues = new int[10];
 //        Arrays.fill(startValues, 100);

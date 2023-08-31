@@ -12,11 +12,11 @@ public class TwoDimensionalArrays
         {
             for (int r = 0; r < 4; r++)
             {
-                sales[y][r] = Math.floor(Math.random() * 2000000 + 100000);
+                sales[y][r] = Math.floor(Math.random() * 20000 + 1000);
             }
         }
         NumberFormat cf = NumberFormat.getCurrencyInstance();
-        System.out.println("\tNorth\t\tSouth\t\tEast\t\tWest");
+        System.out.println("\t\tNorth\t\tSouth\t\tEast\t\tWest");
         int year = 2004;
         for (int y = 0; y < 5; y++)
         {
