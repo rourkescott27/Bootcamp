@@ -1,74 +1,94 @@
-package com.example.book6.ch4;
+package com.example.book6.ch5;
 
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PizzaOrder extends Application
 {
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+
     Stage stage;
+
+    // Customer name, phone and address fields
     TextField txtName;
     TextField txtPhone;
     TextField txtAddress;
 
+    // Size radio buttons
     RadioButton rdoSmall;
     RadioButton rdoMedium;
     RadioButton rdoLarge;
+
+    // Crust style radio buttons
     RadioButton rdoThin;
     RadioButton rdoThick;
 
+    // Topping radio buttons
     CheckBox chkPepperoni;
+    CheckBox chkSausage;
+    CheckBox chkLinguica;
+    CheckBox chkOlives;
     CheckBox chkMushrooms;
+    CheckBox chkTomatoes;
     CheckBox chkAnchovies;
 
     ToggleGroup groupSize;
 
     ToggleGroup groupCrust;
 
-
-    public static void main(String[] args)
-    {
-        launch(args);
-    }
-
     @Override
     public void start(Stage primaryStage)
     {
         stage = primaryStage;
 
-//        CREATE THE LABEL NAME AND TEXT FIELD
+// ----- Create the top pane -----
+        Text textHeading = new Text("Order Your Pizza Now!");
+        textHeading.setFont(new Font(20));
+        HBox paneTop = new HBox(textHeading);
+        paneTop.setPadding(new Insets(20, 10, 20, 10));
+
+// ---------- Create the customer pane ----------
+// Create the name label and text field
         Label lblName = new Label("Name:");
+        lblName.setPrefWidth(100);
         txtName = new TextField();
-        txtName.setMinWidth(100);
-        txtName.setPrefWidth(200);
-        txtName.setMaxWidth(300);
-        txtName.setPromptText("Enter the name here");
+        txtName.setPrefColumnCount(20);
+        txtName.setPromptText("Enter the customer's name here");
+        txtName.setMaxWidth(Double.MAX_VALUE);
+        HBox paneName = new HBox(lblName, txtName);
 
-//        CREATE THE PHONE NUMBER LABEL AND TEXT FIELD
+// Create the phone number label and text field
         Label lblPhone = new Label("Phone Number:");
+        lblPhone.setPrefWidth(100);
         txtPhone = new TextField();
-        txtPhone.setMinWidth(60);
-        txtPhone.setPrefWidth(120);
-        txtPhone.setMaxWidth(180);
-        txtPhone.setPromptText("Enter your phone number here");
+        txtPhone.setPrefColumnCount(20);
+        txtPhone.setPromptText("Enter the customer's phone number here");
+        HBox panePhone = new HBox(lblPhone, txtPhone);
 
-//        CREATE THE ADDRESS LABEL AND TEXT FIELD
+// Create the address label and text field
         Label lblAddress = new Label("Address:");
+        lblAddress.setPrefWidth(100);
         txtAddress = new TextField();
-        txtAddress.setMinWidth(100);
-        txtAddress.setPrefWidth(200);
-        txtAddress.setMaxWidth(300);
-        txtAddress.setPromptText("Enter your address here");
+        txtAddress.setPrefColumnCount(20);
+        txtAddress.setPromptText("Enter the customer's address here");
+        HBox paneAddress = new HBox(lblAddress, txtAddress);
 
-//        CREATE THE SIZE PANE
+// Create the customer pane
+        VBox paneCustomer = new VBox(10, paneName, panePhone, paneAddress);
+
+// ---------- Create the order pane ----------
+// Create the size pane
         Label lblSize = new Label("Size");
         rdoSmall = new RadioButton("Small");
         rdoMedium = new RadioButton("Medium");
@@ -79,11 +99,10 @@ public class PizzaOrder extends Application
         rdoSmall.setToggleGroup(groupSize);
         rdoMedium.setToggleGroup(groupSize);
         rdoLarge.setToggleGroup(groupSize);
-
         VBox paneSize = new VBox(lblSize, rdoSmall, rdoMedium, rdoLarge);
         paneSize.setSpacing(10);
 
-//        CREATE THE CRUST PANE
+        // Create the crust pane
         Label lblCrust = new Label("Crust");
         rdoThin = new RadioButton("Thin");
         rdoThick = new RadioButton("Thick");
@@ -92,84 +111,73 @@ public class PizzaOrder extends Application
         groupCrust = new ToggleGroup();
         rdoThin.setToggleGroup(groupCrust);
         rdoThick.setToggleGroup(groupCrust);
-
         VBox paneCrust = new VBox(lblCrust, rdoThin, rdoThick);
         paneCrust.setSpacing(10);
 
-//        CREATE THE TOPPINGS PANE
+// Create the toppings pane
         Label lblToppings = new Label("Toppings");
         chkPepperoni = new CheckBox("Pepperoni");
+        chkSausage = new CheckBox("Sausage");
+        chkLinguica = new CheckBox("Linguica");
+        chkOlives = new CheckBox("Olives");
         chkMushrooms = new CheckBox("Mushrooms");
+        chkTomatoes = new CheckBox("Tomatoes");
         chkAnchovies = new CheckBox("Anchovies");
         chkAnchovies.setOnAction(e -> chkAnchovies_Click());
 
-        VBox paneToppings = new VBox(lblToppings, chkPepperoni, chkMushrooms, chkAnchovies);
-        paneToppings.setSpacing(10);
+        FlowPane paneToppings = new FlowPane(Orientation.VERTICAL,
+                chkPepperoni, chkSausage, chkLinguica, chkOlives,
+                chkMushrooms, chkTomatoes, chkAnchovies);
+        paneToppings.setPadding(new Insets(10, 0, 10, 0));
+        paneToppings.setHgap(20);
+        paneToppings.setVgap(10);
+        paneToppings.setPrefWrapLength(100);
+        VBox paneTopping = new VBox(lblToppings, paneToppings);
 
-//        CREATE THE BUTTONS
+// Add the size, crust, and toppings pane to the order pane
+        HBox paneOrder = new HBox(50, paneSize, paneCrust, paneTopping);
+
+// Create the center pane
+        VBox paneCenter = new VBox(20, paneCustomer, paneOrder);
+        paneCenter.setPadding(new Insets(0, 10, 0, 10));
+
+// ---------- Create the bottom pane ----------
         Button btnOK = new Button("OK");
         btnOK.setPrefWidth(80);
-        btnOK.setOnAction(e -> btnOk_Click());
+        btnOK.setOnAction(e -> btnOK_Click());
 
         Button btnCancel = new Button("Cancel");
         btnCancel.setPrefWidth(80);
         btnCancel.setOnAction(e -> btnCancel_Click());
+        Region spacer = new Region();
 
-        HBox paneButtons = new HBox(10, btnOK, btnCancel);
+        HBox paneBottom = new HBox(10, spacer, btnOK, btnCancel);
+        paneBottom.setHgrow(spacer, Priority.ALWAYS);
+        paneBottom.setPadding(new Insets(20, 10, 20, 10));
 
-//        CREATE A GRID PANE LAYOUT
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10));
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setMinWidth(500);
-        grid.setPrefWidth(500);
-        grid.setMaxWidth(800);
+// ---------- Finish the scene ----------
+        BorderPane paneMain = new BorderPane();
+        paneMain.setTop(paneTop);
+        paneMain.setCenter(paneCenter);
+        paneMain.setBottom(paneBottom);
 
-//        ADD NODES TO THE PANE
-        grid.addRow(0, lblName, txtName);
-        grid.addRow(1, lblPhone, txtPhone);
-        grid.addRow(2, lblAddress, txtAddress);
-        grid.addRow(3, paneSize, paneCrust, paneToppings);
-        grid.add(paneButtons, 2, 4);
-
-//        SET ALIGNMENTS AND SPANNING
-        GridPane.setHalignment(lblName, HPos.RIGHT);
-        GridPane.setHalignment(lblPhone, HPos.RIGHT);
-        GridPane.setHalignment(lblAddress, HPos.RIGHT);
-        GridPane.setColumnSpan(txtName, 2);
-        GridPane.setColumnSpan(txtPhone, 2);
-        GridPane.setColumnSpan(txtAddress, 2);
-
-//        SET COLUMN WIDTHS
-        ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(33);
-        ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(33);
-        ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(33);
-        grid.getColumnConstraints().addAll(col1, col2, col3);
-
-//        CREATE THE SCENE AND THE STAGE
-        Scene scene = new Scene(grid);
+// Create the scene and the stage
+        Scene scene = new Scene(paneMain);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Pizza Order");
-        primaryStage.setMinWidth(500);
-        primaryStage.setMaxWidth(900);
         primaryStage.show();
-
     }
 
-    public void btnOk_Click()
+    public void btnOK_Click()
     {
-//        MESSAGE STRING WITH CUSTOMER INFO
-        String msg = "Customer: \n\n";
+// Create a message string with the customer information
+        String msg = "Customer:\n\n";
         msg += "\t" + txtName.getText() + "\n";
-        msg += "\t" + txtPhone.getText() + "\n";
         msg += "\t" + txtAddress.getText() + "\n";
+        msg += "\t" + txtPhone.getText() + "\n\n";
         msg += "You have ordered a ";
 
-//        PIZZA SIZE
+// Add the pizza size
         if (rdoSmall.isSelected())
         {
             msg += "small ";
@@ -183,31 +191,36 @@ public class PizzaOrder extends Application
             msg += "large ";
         }
 
-//        CRUST STYLE
+// Add the crust style
         if (rdoThin.isSelected())
         {
             msg += "thin crust pizza with ";
         }
+
         if (rdoThick.isSelected())
         {
-            msg += "thick crust pizza with";
+            msg += "thick crust pizza with ";
         }
 
-//        ADD THE TOPPINGS
+// Add the toppings
         String toppings = "";
-
         toppings = buildToppings(chkPepperoni, toppings);
+        toppings = buildToppings(chkSausage, toppings);
+        toppings = buildToppings(chkLinguica, toppings);
+        toppings = buildToppings(chkOlives, toppings);
+        toppings = buildToppings(chkTomatoes, toppings);
         toppings = buildToppings(chkMushrooms, toppings);
         toppings = buildToppings(chkAnchovies, toppings);
+
         if (toppings.equals(""))
         {
             msg += "no toppings.";
         } else
         {
-            msg += " the following toppings:\n" + toppings;
+            msg += "the following toppings:\n"
+                    + toppings;
         }
-
-// DISPLAY THE MESSAGE
+// Display the message
         Alert a = new Alert(Alert.AlertType.INFORMATION, msg);
         a.setTitle("Order Details");
         a.showAndWait();
@@ -219,15 +232,19 @@ public class PizzaOrder extends Application
         chkAnchovies.setSelected(false);
         chkMushrooms.setSelected(false);
         chkPepperoni.setSelected(false);
+        chkLinguica.setSelected(false);
+        chkOlives.setSelected(false);
+        chkTomatoes.setSelected(false);
+        chkSausage.setSelected(false);
 
         txtAddress.clear();
         txtPhone.clear();
         txtName.clear();
-
     }
 
     public String buildToppings(CheckBox chk, String msg)
     {
+// Helper method for displaying the list of toppings
         if (chk.isSelected())
         {
             if (!msg.equals(""))

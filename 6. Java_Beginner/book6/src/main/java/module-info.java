@@ -15,4 +15,7 @@ module com.example.book6 {
     opens com.example.book6.ch4 to javafx.fxml;
     exports com.example.book6.ch5;
     opens com.example.book6.ch5 to javafx.fxml;
+    exports com.example.book6.ch6;
+    opens com.example.book6.ch6 to javafx.fxml;
+
 }

@@ -8,10 +8,12 @@ public class Game
     }
 }
 
+// OVERRIDING THE PLAY METHOD OF THE GAME CLASS
 class Chess extends Game
 {
-//    public void play()
-//    {
-//        System.out.println("Playing Chess");
-//    }
+    public void play()
+    {
+        System.out.println("Playing Chess");
+        super.play();
+    }
 }
